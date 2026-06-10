@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WHO-IS-IT - Copertina</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Press+Start+2P&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Reset di base */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fce4ec; /* Sfondo rosa chiaro */
+            color: #4a148c; 
+            overflow: hidden; /* Nasconde le barre di scorrimento */
+        }
+
+        /* Layout centrato a tutto schermo */
+        .copertina {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Sottile effetto texture a micro-pixel sullo sfondo */
+        .copertina::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(#ff80ab 1.5px, transparent 1.5px);
+            background-size: 32px 32px;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .copertina * {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* IL TITOLO VIOLA FLUO */
+        .main-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 4rem;
+            color: #9c27b0; /* Viola */
+            /* Effetto Bordo Fluo Neon */
+            text-shadow: 
+                0 0 10px #e1bee7, 
+                0 0 20px #9c27b0, 
+                0 0 40px #7b1fa2,
+                0 0 80px #4a148c;
+            margin-bottom: 25px;
+            letter-spacing: 2px;
+            line-height: 1.2;
+        }
+
+        /* LA FRASE SOTTO IL TITOLO */
+        .tagline {
+            font-size: 1.4rem;
+            color: #4a148c;
+            font-weight: 600;
+            margin-bottom: 50px;
+            letter-spacing: 1px;
+        }
+
+        /* IL PULSANTE START (Scrittura rosa sbiadito, bordi bianco fluo) */
+        .start-btn {
+            display: inline-block;
+            text-decoration: none;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.5rem;
+            color: #f48fb1; /* Rosa sbiadito / Pastello */
+            background: transparent;
+            padding: 20px 60px;
+            border: 4px solid #ffffff;
+            border-radius: 50px;
+            cursor: pointer;
+            /* Effetto Bordo Bianco Fluo Neon */
+            box-shadow: 
+                0 0 15px #ffffff, 
+                inset 0 0 10px #ffffff,
+                0 0 30px rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        /* Animazione al passaggio del mouse */
+        .start-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 
+                0 0 25px #ffffff, 
+                inset 0 0 15px #ffffff,
+                0 0 40px #f48fb1; /* Riflesso rosa sbiadito all'hover */
+            color: #f06292; /* Si accende appena un po' di più quando ci passi sopra */
+        }
+
+        /* Ottimizzazione per smartphone */
+        @media (max-width: 768px) {
+            .main-title { font-size: 2.2rem; }
+            .tagline { font-size: 1rem; }
+            .start-btn { font-size: 1.1rem; padding: 15px 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="copertina">
+        <h1 class="main-title">WHO-IS-IT</h1>
+        <p class="tagline">"dietro ogni pixel si nasconde un segreto"</p>
+        
+        <a href="pagina2.html" class="start-btn">START</a>
+    </main>
+
+</body>
+</html>
