@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WHO-IS-IT - I Personaggi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* Reset e Base */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Permette lo scorrimento fluido */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fce4ec; /* Sfondo rosa chiaro */
+            color: #4a148c;
+        }
+
+        /* Contenitore principale */
+        .personaggi-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 140px 20px 80px 20px;
+            position: relative;
+        }
+
+        /* Effetto texture pixel di sfondo */
+        .personaggi-page::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(#ff80ab 1.5px, transparent 1.5px);
+            background-size: 32px 32px;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .personaggi-page > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* HEADER SUPERIORE FISSO (Casetta, Titolo, Punti) */
+        .header-top {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 110px;
+            background-color: rgba(254, 228, 236, 0.95);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            z-index: 10;
+            border-bottom: 2px dashed rgba(244, 143, 177, 0.5);
+        }
+
+        .left-controls {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        /* Casetta in alto a sinistra */
+        .home-icon {
+            font-size: 1.8rem;
+            color: #4a148c;
+            text-decoration: none;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .home-icon:hover {
+            color: #f48fb1;
+            transform: scale(1.1);
+        }
+
+        /* BOX PUNTEGGIO IN ALTO A SINISTRA */
+        .punti-box {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.9rem;
+            color: #9c27b0;
+            background: #ffffff;
+            padding: 10px 20px;
+            border-radius: 12px;
+            border: 2px solid #f48fb1;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        } Oro:
+
+        /* Titolo della pagina (Rosa Sbiadito) */
+        .page-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.5rem;
+            color: #f48fb1; 
+            text-shadow: 0 0 8px rgba(244, 143, 177, 0.4);
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.1rem;
+            color: #7b1fa2;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        /* GRIGLIA DEGLI 8 PERSONAGGI */
+        .grid-personaggi {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            max-width: 1100px;
+            width: 100%;
+            margin-bottom: 60px;
+        }
+
+        .card-personaggio {
+            background: rgba(255, 255, 255, 0.5);
+            border: 3px solid #ffffff;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.03);
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .card-personaggio:hover {
+            transform: translateY(-5px);
+            border-color: #f48fb1;
+            box-shadow: 0 12px 24px rgba(244, 143, 177, 0.3);
+        }
+
+        .img-slot {
+            width: 100%;
+            height: 160px;
+            background: #e1bee7;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .img-slot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .info-testo {
+            font-size: 0.95rem;
+            line-height: 1.4;
+            color: #4a148c;
+        }
+
+        .info-testo strong {
+            display: block;
+            font-size: 1.1rem;
+            color: #7b1fa2;
+            margin-bottom: 5px;
+        }
+
+        /* ==================== SEZIONE DI SCORRIMENTO IN BASSO ==================== */
+        .dettaglio-personaggio {
+            width: 100%;
+            max-width: 700px;
+            background: rgba(255, 255, 255, 0.6);
+            border: 4px dashed #f48fb1;
+            border-radius: 24px;
+            padding: 40px;
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            text-align: center;
+            /* Gestione visibilità iniziale */
+            opacity: 0;
+            transform: translateY(30px);
+            pointer-events: none;
+            transition: all 0.5s ease;
+        }
+
+        /* Classe attivata via JS quando si clicca un personaggio */
+        .dettaglio-personaggio.mostra {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .img-dettaglio {
+            width: 200px;
+            height: 200px;
+            background: #e1bee7;
+            border-radius: 20px;
+            border: 4px solid #ffffff;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(255,255,255,0.6);
+        }
+
+        .img-dettaglio img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .dettaglio-info-testo {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #4a148c;
+        }
+
+        /* PULSANTI DI GIOCO (Rosso e Verde) */
+        .game-buttons {
+            display: flex;
+            gap: 25px;
+            margin-top: 10px;
+        }
+
+        .btn-game {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.9rem;
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: 4px solid #ffffff;
+            cursor: pointer;
+            color: #ffffff;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-rosso {
+            background-color: #e74c3c;
+            box-shadow: 0 0 15px rgba(231, 76, 60, 0.4);
+        }
+
+        .btn-rosso:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px #e74c3c;
+        }
+
+        .btn-verde {
+            background-color: #2ecc71;
+            box-shadow: 0 0 15px rgba(46, 204, 113, 0.4);
+        }
+
+        .btn-verde:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px #2ecc71;
+        }
+
+        /* Layout Smartphone */
+        @media (max-width: 768px) {
+            .header-top { padding: 0 15px; height: 90px; }
+            .page-title { font-size: 0.9rem; }
+            .punti-box { font-size: 0.7rem; padding: 8px 12px; }
+            .grid-personaggi { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .btn-game { font-size: 0.7rem; padding: 12px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header-top">
+        <div class="left-controls">
+            <a href="pagina2.html" class="home-icon" title="Torna alla Home"><i class="fa-solid fa-house"></i></a>
+            <div class="punti-box">PUNTI: <span id="score">100</span></div>
+        </div>
+        <h2 class="page-title">I PERSONAGGI</h2>
+        <div style="width: 80px; max-width: 10%;"></div> 
+    </header>
+
+    <main class="personaggi-page">
+        <h3 class="section-subtitle">Scegli il tuo personaggio del giorno</h3>
+
+        <div class="grid-personaggi">
+            <div class="card-personaggio" onclick="selezionaOggetto('Chanel', 'Mundin', '17', '37ffadcf-7666-4d61-88c5-4f1159663ee3.jpeg?random=1')">
+                <div class="img-slot"><img src="37ffadcf-7666-4d61-88c5-4f1159663ee3.jpeg" alt="PG 1"></div>
+                <div class="info-testo"><strong>Chanel Mundin</strong>Età: 17</div>
+            </div>
+
+            <div class="card-personaggio" onclick="selezionaOggetto('Noemi', 'Giustino', '18', 'IMG_2830.jpeg?random=2')">
+                <div class="img-slot"><img src="IMG_2830.jpeg" alt="PG 2"></div>
+                <div class="info-testo"><strong>Noemi Giustino</strong>Età: 18</div>
+            </div>
+
+            <div class="card-personaggio" onclick="selezionaOggetto('Edoardo', 'Fumagalli', '17', 'IMG_2831.jpeg?random=3')">
+                <div class="img-slot"><img src="IMG_2831.jpeg" alt="PG 3"></div>
+                <div class="info-testo"><strong>Edoardo Fumagalli</strong>Età: 17</div>
+            </div>
+
+            <div class="card-personaggio" onclick="selezionaOggetto('Geovanni', 'Garcia', '19', 'IMG_2832.jpeg?random=4')">
+                <div class="img-slot"><img src="IMG_2832.jpeg" alt="PG 4"></div>
+                <div class="info-testo"><strong>Geovanni Garcia</strong>Età: 19</div>
+            </div>
+
+            <div class="card-personaggio" onclick="selezionaOggetto('Malik', 'Bouharkat', '18', 'IMG_2843.jpeg?random=5')">
+                <div class="img-slot"><img src="IMG_2843.jpeg" alt="PG 5"></div>
+                <div class="info-testo"><strong>Malik Bouharkat</strong>Età: 18</div>
+            </div>
+
+            <div class="card-personaggio" onclick="selezionaOggetto('Alessandro', 'Giammetta', '18', 'IMG_2844.jpeg?random=6')">
+                <div class="img-slot"><img src="IMG_2844.jpeg" alt="PG 6"></div>
+                <div class="info-testo"><strong>Alessandro Giammetta</strong>Età: 18</div>
+            </div>
+
+            <div class="card-personaggio" onclick="selezionaOggetto('David', 'Solarzano', '19', 'IMG_2847.jpeg?random=7')">
+                <div class="img-slot"><img src="IMG_2847.jpeg" alt="PG 7"></div>
+                <div class="info-testo"><strong>David Solarzano</strong>Età: 19</div>
+            </div>
+
+            <div class="card-personaggio" onclick="selezionaOggetto('Davide', 'Broglia', '16', 'IMG_2851.jpeg?random=8')">
+                <div class="img-slot"><img src="IMG_2851.jpeg" alt="PG 8"></div>
+                <div class="info-testo"><strong>Davide Broglia</strong>Età: 16</div>
+            </div>
+        </div>
+
+        <div id="pannello-basso" class="dettaglio-personaggio">
+            <h3 style="font-family: 'Press Start 2P', cursive; font-size: 1rem; color: #7b1fa2; margin-bottom: 10px;">PERSONAGGIO DEL GIORNO</h3>
+            
+            <div class="img-dettaglio">
+                <img id="dettaglio-img" alt="Focus">
+            </div>
+
+            <div class="dettaglio-info-testo">
+                <p><strong>NOME:</strong> <span id="det-nome"></span></p>
+                <p><strong>COGNOME:</strong> <span id="det-cognome"></span></p>
+                <p><strong>ETÀ:</strong> <span id="det-eta"></span></p>
+            </div>
+
+            <div class="game-buttons">
+                <button class="btn-game btn-rosso" onclick="aggiornaPunti(-5)">ERRATO (-5)</button>
+                <button class="btn-game btn-verde" onclick="aggiornaPunti(10)">CORRETTO (+10)</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let totalePunti = 100;
+
+        // Al caricamento della pagina, controlla se c'è già un punteggio salvato per questo browser
+        if (localStorage.getItem('punteggioGioco')) {
+            totalePunti = parseInt(localStorage.getItem('punteggioGioco'));
+        } else {
+            // Se è la prima volta in assoluto, salva il punteggio di partenza (100)
+            localStorage.setItem('punteggioGioco', totalePunti);
+        }
+
+        // Mostra subito il punteggio corretto recuperato dalla memoria
+        document.getElementById('score').innerText = totalePunti;
+
+        function selezionaOggetto(nome, cognome, eta, urlImmagine) {
+            document.getElementById('det-nome').innerText = nome.toUpperCase();
+            document.getElementById('det-cognome').innerText = cognome.toUpperCase();
+            document.getElementById('det-eta').innerText = eta;
+            document.getElementById('dettaglio-img').src = urlImmagine;
+            
+            const pannello = document.getElementById('pannello-basso');
+            pannello.classList.add('mostra');
+
+            setTimeout(() => {
+                pannello.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 50);
+        }
+
+        function aggiornaPunti(valore) {
+            totalePunti += valore;
+            
+            // Impedisce al punteggio di scendere sotto lo zero
+            if (totalePunti < 0) totalePunti = 0;
+            
+            // Aggiorna la grafica del punteggio
+            document.getElementById('score').innerText = totalePunti;
+            
+            // Salva il nuovo punteggio nel browser, così non si perde al refresh
+            localStorage.setItem('punteggioGioco', totalePunti);
+        }
+    </script>
+
+</body>
+</html>

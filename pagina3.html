@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WHO-IS-IT - Come si gioca?</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* Reset di base */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fce4ec; /* Sfondo rosa chiaro richiesto */
+            color: #4a148c; 
+            overflow-x: hidden;
+        }
+
+        /* Layout della Pagina Istruzioni */
+        .istruzioni-page {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center;     
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Effetto texture a micro-pixel sullo sfondo */
+        .istruzioni-page::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(#ff80ab 1.5px, transparent 1.5px);
+            background-size: 32px 32px;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .istruzioni-page * {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ICONA CASETTA IN ALTO A SINISTRA */
+        .home-icon {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            font-size: 2rem;
+            color: #4a148c;
+            text-decoration: none;
+            transition: color 0.3s, transform 0.3s;
+            opacity: 0.8;
+        }
+
+        .home-icon:hover {
+            color: #f48fb1;
+            transform: scale(1.2);
+            opacity: 1;
+        }
+
+        /* TITOLO IN ALTO AL CENTRO */
+        .page-title {
+            position: absolute;
+            top: 40px; 
+            left: 50%;
+            transform: translateX(-50%); 
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.5rem; 
+            color: #f48fb1; /* Rosa sbiadito */
+            text-shadow: 0 0 8px rgba(244, 143, 177, 0.4);
+            letter-spacing: 2px;
+            margin: 0;
+            width: 100%;
+        }
+
+        /* CONTENITORE SPIEGAZIONE */
+        .spiegazione-container {
+            max-width: 900px;
+            background: rgba(255, 255, 255, 0.4);
+            padding: 50px;
+            border-radius: 30px;
+            border: 3px solid #ffffff;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            margin-top: 60px;
+        }
+
+        /* H3 CLASSICO PER LE REGOLE */
+        h3 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            font-size: 1.5rem;
+            line-height: 1.8;
+            color: #4a148c;
+            margin: 0;
+        }
+
+        .highlight {
+            color: #9c27b0;
+            font-weight: 600;
+        }
+
+        /* Ottimizzazione per smartphone */
+        @media (max-width: 768px) {
+            .page-title { font-size: 0.9rem; top: 35px; }
+            .home-icon { font-size: 1.5rem; top: 30px; left: 25px; }
+            .spiegazione-container { padding: 30px; margin-top: 40px; }
+            h3 { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="istruzioni-page">
+        <a href="pagina2.html" class="home-icon" title="Torna alla Home">
+            <i class="fa-solid fa-house"></i>
+        </a>
+
+        <h2 class="page-title">COME SI GIOCA?</h2>
+        
+        <div class="spiegazione-container">
+            <h3>
+                Il gioco è semplice: ogni giocatore sceglie un <span class="highlight">personaggio del giorno</span> attraverso la schermata che verrà dopo. Io pescherò dalla mia busta una foto che sarà esattamente il personaggio che dovrete indovinare.
+                  Dovrai farmi domande a cui posso rispondere solo con <span class="highlight">SI</span> o <span class="highlight">NO</span>. 
+                <br><br>
+                Ci sarà un timer che se scade perderai. <span class="highlight">indovina l'identità</span> segreta, se azzecchi il personaggio del giorno riceverai dei punti altrimenti li perderai. 
+            </h3>
+        </div>
+    </main>
+
+</body>
+</html>

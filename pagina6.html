@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WHO-IS-IT - E tu cosa faresti?</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fce4ec; 
+            color: #4a148c; 
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .idee-page {
+            width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;     
+            padding: 130px 20px 60px 20px;
+            position: relative;
+        }
+
+        .idee-page::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(#ff80ab 1.5px, transparent 1.5px);
+            background-size: 32px 32px;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .idee-page * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .home-icon {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            font-size: 2rem;
+            color: #4a148c;
+            text-decoration: none;
+            transition: color 0.3s, transform 0.3s;
+            opacity: 0.8;
+        }
+
+        .home-icon:hover {
+            color: #f48fb1;
+            transform: scale(1.2);
+            opacity: 1;
+        }
+
+        .page-title {
+            position: absolute;
+            top: 40px; 
+            left: 50%;
+            transform: translateX(-50%); 
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.3rem; 
+            color: #f48fb1; 
+            text-shadow: 0 0 8px rgba(244, 143, 177, 0.4);
+            letter-spacing: 1px;
+            margin: 0;
+            text-align: center;
+            width: 90%;
+        }
+
+        .main-container {
+            max-width: 800px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .spiegazione-box {
+            background: rgba(255, 255, 255, 0.4);
+            border: 3px solid #ffffff;
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02);
+            text-align: center;
+        }
+
+        .spiegazione-box p {
+            font-size: 1.2rem;
+            line-height: 1.7;
+        }
+
+        .idea-form-box {
+            background: rgba(255, 255, 255, 0.5);
+            border: 3px dashed #f48fb1;
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 8px 25px rgba(244, 143, 177, 0.1);
+        }
+
+        .form-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1rem;
+            color: #7b1fa2;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: #ffffff;
+            border: 3px solid #ffffff;
+            border-radius: 50px;
+            padding: 5px 10px 5px 25px;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .idea-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            color: #4a148c;
+            background: transparent;
+        }
+
+        .idea-input::placeholder {
+            color: #b39ddb;
+            opacity: 1;
+        }
+
+        .submit-btn {
+            background: #f48fb1;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            color: #ffffff;
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .submit-btn:hover {
+            background: #e91e63;
+            transform: scale(1.05);
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-weight: 600;
+            margin-top: 15px;
+            text-align: center;
+            display: none;
+        }
+
+        /* OUTPUT MINI BOX DELLE RISPOSTE */
+        .output-section {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .idea-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 20px 25px;
+            border-left: 6px solid #9c27b0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            animation: fadeIn 0.4s ease;
+        }
+
+        /* Titolo interno del mini box (Idea 1, Idea 2 ecc) */
+        .idea-card h4 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.75rem;
+            color: #9c27b0;
+            margin-bottom: 8px;
+        }
+
+        .idea-card p {
+            font-size: 1.1rem;
+            color: #4a148c;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .page-title { font-size: 0.85rem; top: 35px; }
+            .home-icon { font-size: 1.5rem; top: 30px; left: 25px; }
+            .spiegazione-box p { font-size: 1rem; }
+            .input-group { padding: 5px 5px 5px 15px; }
+            .idea-input { font-size: 0.95rem; }
+            .submit-btn { width: 40px; height: 40px; font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="idee-page">
+        <a href="pagina2.html" class="home-icon" title="Torna alla Home">
+            <i class="fa-solid fa-house"></i>
+        </a>
+
+        <h2 class="page-title">E TU COSA FARESTI?</h2>
+        
+        <div class="main-container">
+            
+            <div class="spiegazione-box">
+                <p>
+                    Aiutaci a espandere i nostri orizzonti! Pensa a un potenziale prossimo prodotto, un aggiornamento o una funzionalità innovativa che dovrei lanciare sul mercato. Scrivi la tua proposta qui sotto.
+                </p>
+            </div>
+
+            <div class="idea-form-box">
+                <h3 class="form-title">Lascia la tua idea</h3>
+                
+                <div class="input-group">
+                    <input type="text" id="user-idea" class="idea-input" placeholder="inserisci qui il testo" autocomplete="off">
+                    
+                    <button class="submit-btn" onclick="inviaIdea()" title="Invia idea">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+                
+                <div id="error-box" class="error-message">
+                    Hai già inviato una proposta per questa sessione! È consentita solo un'idea per utente.
+                </div>
+            </div>
+
+            <div class="output-section" id="ideas-output"></div>
+
+        </div>
+    </main>
+
+   <script>
+        let counterIdee = 1;
+
+        // Al caricamento della pagina recupera la cronologia dei box inseriti
+        window.onload = function() {
+            // Controlla se ci sono idee salvate in memoria
+            if (localStorage.getItem('listaIdee')) {
+                // Converte la stringa di testo memorizzata nuovamente in un array di idee
+                const ideeSalvate = JSON.parse(localStorage.getItem('listaIdee'));
+                
+                // Genera i mini box per ogni idea salvata
+                ideeSalvate.forEach(function(testo) {
+                    mostraIdeaASchermo(testo);
+                });
+            }
+
+            // Se l'utente (IP locale) ha già inviato un'idea, blocca il form di input
+            if (localStorage.getItem('ideaInviata') === 'true') {
+                disabilitaForm();
+            }
+        }
+
+        function inviaIdea() {
+            const inputField = document.getElementById('user-idea');
+            const testo = inputField.value.trim();
+
+            if (testo === "") return; 
+
+            if (localStorage.getItem('ideaInviata') === 'true') {
+                document.getElementById('error-box').style.display = 'block';
+                return;
+            }
+
+            // Mostra subito il mini box a schermo
+            mostraIdeaASchermo(testo);
+
+            // --- Logica di persistenza al ricaricamento ---
+            let ideeSalvate = [];
+            if (localStorage.getItem('listaIdee')) {
+                ideeSalvate = JSON.parse(localStorage.getItem('listaIdee'));
+            }
+            ideeSalvate.push(testo); // Aggiunge la nuova idea all'elenco
+            localStorage.setItem('listaIdee', JSON.stringify(ideeSalvate)); // Salva la lista aggiornata
+            
+            // Blocca ulteriori invii per questo utente
+            localStorage.setItem('ideaInviata', 'true');
+
+            inputField.value = "";
+            disabilitaForm();
+        }
+
+        function mostraIdeaASchermo(testoIdea) {
+            const outputContainer = document.getElementById('ideas-output');
+            
+            const nuovaCard = document.createElement('div');
+            nuovaCard.className = 'idea-card';
+            nuovaCard.innerHTML = `
+                <h4>IDEA ${counterIdee}</h4>
+                <p>${testoIdea}</p>
+            `;
+            
+            outputContainer.appendChild(nuovaCard);
+            counterIdee++;
+        }
+
+        function disabilitaForm() {
+            document.getElementById('user-idea').disabled = true;
+            document.getElementById('user-idea').placeholder = "Grazie per il tuo contributo!";
+            document.querySelector('.submit-btn').disabled = true;
+            document.querySelector('.submit-btn').style.background = '#b0bec5';
+            document.querySelector('.submit-btn').style.cursor = 'not-allowed';
+        }
+    </script>
+
+</body>
+</html>

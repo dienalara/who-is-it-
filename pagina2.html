@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WHO-IS-IT - Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Press+Start+2P&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Reset di base */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fce4ec; /* Sfondo rosa chiaro richiesto */
+            color: #4a148c; 
+            overflow-x: hidden;
+        }
+
+        /* Layout della Home Page */
+        .home-page {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Centra il menu verticalmente */
+            align-items: center;     /* Centra tutto orizzontalmente */
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Sottile effetto texture a micro-pixel sullo sfondo */
+        .home-page::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(#ff80ab 1.5px, transparent 1.5px);
+            background-size: 32px 32px;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .home-page * {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* FRECCIA IN ALTO A SINISTRA FORMA DI SITO RETRÒ */
+        .back-arrow {
+            position: absolute;
+            top: 40px;
+            left: 40px; /* Posizionata nell'angolo in alto a sinistra */
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.5rem;
+            color: #4a148c; /* Colore scuro di base, molto discreto */
+            text-decoration: none;
+            transition: color 0.2s, transform 0.2s;
+            opacity: 0.7;
+        }
+
+        .back-arrow:hover {
+            color: #f48fb1; /* Diventa rosa sbiadito all'hover */
+            transform: scale(1.2);
+            opacity: 1;
+        }
+
+        /* SCRITTA IN ALTO AL CENTRO */
+        .home-title {
+            position: absolute;
+            top: 40px; 
+            left: 50%;
+            transform: translateX(-50%); 
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.5rem; 
+            color: #f48fb1; /* Rosa sbiadito */
+            text-shadow: 0 0 8px rgba(244, 143, 177, 0.4);
+            letter-spacing: 2px;
+            margin: 0;
+        }
+
+        /* Contenitore verticale del Menu */
+        .menu-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px; 
+            max-width: 800px;
+            width: 100%;
+            margin-top: 40px; 
+        }
+
+        /* STILE PULSANTI MENU (Testo rosa sbiadito, bordi bianco fluo) */
+        .menu-btn {
+            display: inline-block;
+            text-decoration: none;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.1rem;
+            color: #f48fb1; 
+            background: transparent;
+            padding: 18px 40px;
+            border: 4px solid #ffffff;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 
+                0 0 15px #ffffff, 
+                inset 0 0 10px #ffffff,
+                0 0 30px rgba(255, 255, 255, 0.4);
+            transition: all 0.3s ease;
+            line-height: 1.4;
+        }
+
+        .menu-btn:hover {
+            transform: scale(1.03);
+            box-shadow: 
+                0 0 25px #ffffff, 
+                inset 0 0 15px #ffffff,
+                0 0 40px #f48fb1;
+            color: #f06292;
+        }
+
+        /* Ottimizzazione per smartphone */
+        @media (max-width: 768px) {
+            .home-title { font-size: 1.1rem; top: 30px; }
+            .back-arrow { font-size: 1.1rem; top: 30px; left: 20px; }
+            .menu-btn { font-size: 0.75rem; padding: 14px 20px; border-width: 3px; }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="home-page">
+     <h2 class="home-title">HOME</h2>
+        
+        <nav class="menu-container">
+            <a href="pagina3.html" class="menu-btn">COME SI GIOCA?</a>
+            <a href="pagina4.html" class="menu-btn">I PERSONAGGI</a>
+            <a href="pagina5.html" class="menu-btn">COSA SI NASCONDE DIETRO A TUTTO CIO'?</a>
+            <a href="pagina6.html" class="menu-btn">E TU COSA FARESTI?</a>
+            <a href="#" class="menu-btn">RINGRAZIAMENTI</a>
+        </nav>
+    </main>
+
+</body>
+</html>

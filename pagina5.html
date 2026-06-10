@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WHO-IS-IT - Cosa C'E' dietro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+   <style>
+        /* Reset di base */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fce4ec; /* Sfondo rosa chiaro */
+            color: #4a148c; 
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Layout della Pagina */
+        .dietro-page {
+            width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;     
+            padding: 140px 20px 60px 20px;
+            position: relative;
+        }
+
+        /* Effetto texture a micro-pixel sullo sfondo */
+        .dietro-page::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(#ff80ab 1.5px, transparent 1.5px);
+            background-size: 32px 32px;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .dietro-page * {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ICONA CASETTA IN ALTO A SINISTRA */
+        .home-icon {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            font-size: 2rem;
+            color: #4a148c;
+            text-decoration: none;
+            transition: color 0.3s, transform 0.3s;
+            opacity: 0.8;
+        }
+
+        .home-icon:hover {
+            color: #f48fb1;
+            transform: scale(1.2);
+            opacity: 1;
+        }
+
+        /* TITOLO IN ALTO AL CENTRO (Rosa sbiadito) */
+        .page-title {
+            position: absolute;
+            top: 40px; 
+            left: 50%;
+            transform: translateX(-50%); 
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.4rem; 
+            color: #f48fb1; 
+            text-shadow: 0 0 8px rgba(244, 143, 177, 0.4);
+            letter-spacing: 1px;
+            margin: 0;
+            text-align: center;
+            width: 90%;
+        }
+
+        /* CONTENITORE BLOCCHI REGOLE */
+        .content-container {
+            max-width: 1000px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+            margin-top: 40px;
+        }
+
+        /* STRUTTURA DEL BLOCCO */
+        .row-block {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.4);
+            border: 3px solid #ffffff;
+            border-radius: 24px;
+            padding: 30px;
+            gap: 40px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02);
+        }
+
+        /* Contenitore per le immagini singole o doppie */
+        .image-wrapper {
+            display: flex;
+            gap: 15px;
+            flex-shrink: 0;
+        }
+
+        /* DIMENSIONE VIA DI MEZZO BILANCIATA (240PX) */
+        .img-box {
+            width: 240px;
+            height: 240px;
+            background: #e1bee7;
+            border-radius: 18px;
+            border: 3px solid #ffffff;
+            overflow: hidden;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+        }
+
+        .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* TESTO ACCANTO ACCENTUATO */
+        .text-side {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.5;
+            color: #4a148c;
+            text-transform: uppercase;
+        }
+
+        .highlight {
+            color: #9c27b0;
+        }
+
+        /* Ottimizzazione per schermi piccoli */
+        @media (max-width: 912px) {
+            .row-block { flex-direction: column; text-align: center; gap: 20px; padding: 25px; }
+            .image-wrapper { justify-content: center; }
+            .text-side { font-size: 1.2rem; }
+        }
+
+        @media (max-width: 768px) {
+            .page-title { font-size: 0.9rem; top: 35px; }
+            .home-icon { font-size: 1.5rem; top: 30px; left: 25px; }
+            .dietro-page { padding-top: 110px; }
+            .img-box { width: 180px; height: 180px; } /* Più compatte su smartphone */
+        }
+    </style>
+    </style>
+</head>
+<body>
+
+    <main class="dietro-page">
+        <a href="pagina2.html" class="home-icon" title="Torna alla Home">
+            <i class="fa-solid fa-house"></i>
+        </a>
+
+        <h2 class="page-title">COSA C'E' DIETRO A TUTTO</h2>
+        
+        <div class="content-container">
+            
+            <div class="row-block">
+                <div class="image-wrapper">
+                    <div class="img-box">
+                        <img src="IMG_3207.jpeg" alt="Gioco Sopra">
+                    </div>
+                </div>
+                <div class="text-side">
+                    "così è come appare il nostro gioco"
+                </div>
+            </div>
+
+            <div class="row-block">
+                <div class="image-wrapper">
+                    <div class="img-box">
+                        <img src="IMG_3208.jpeg" alt="Dietro 1">
+                    </div>
+                    <div class="img-box">
+                        <img src="IMG_3209.jpeg" alt="Dietro 2">
+                    </div>
+                </div>
+                <div class="text-side">
+                    "invece così è come appare da dietro"
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>
